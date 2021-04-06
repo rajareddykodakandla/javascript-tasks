@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>Date and TIme</title>
+    </head>
+    <body>
+        <h1>Date and time problem:</h1><hr>
+
+
+        <h2 id="demo"></h2>
+        <script>
+           var previous=new Date(2020,10,12);
+           var present=new Date();
+
+            var previousyear=previous.getYear();
+            var presentyear=present.getYear();
+            
+            var previousmonth=previous.getMonth();
+            var presentmonth=present.getMonth();
+            
+            var previousdate=previous.getDay();
+            var presentdate=present.getDay();
+
+           var year=presentyear-previousyear;
+           
+            if(previous.getMonth()>present.getMonth())
+            {
+                var month=previousmonth-presentmonth;
+            }
+            else{
+                var month=presentmonth-previousdate;
+            }
+
+
+           if(previous.getDay()>present.getDay())
+           {
+            var date=previousdate-presentdate;
+           }
+           else{
+            var date=presentdate-previousdate;
+           }
+           
+
+           console.log(year);
+           console.log(month);
+           console.log(date);
+
+           if(year==0)
+           {
+               if(month==0)
+               {
+                  console.log("posted " + date +" days ago"); 
+               }
+               else
+               {
+                console.log("posted " + month +" months ago"); 
+               }
+           }
+           else
+            {
+                console.log("posted " + year +" year ago"); 
+            }
+          
+    console.log( "present date   "+present);
+    console.log( "previous date   "+previous);
+
+</script>  
+    </body>
+</html>

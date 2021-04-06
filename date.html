@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+</head>
+<body>
+    <div style="margin: 300px;">
+    <form>
+        Year: 
+        <input type="text" id="year" required>
+        Month: 
+        <input type="text" id="month" required>
+        Day: 
+        <input type="text" id="day" required>
+        <input onclick= "getTimestamp()" type="submit" value="get time">
+    </form>
+    <div id="timestamp"></div>
+    </div>
+</body>
+<script>
+    function getTimestamp(){
+    event.preventDefault();
+    var previousYear = parseInt(document.getElementById("year").value);
+    var previousMonth = parseInt(document.getElementById("month").value - 1);
+    var previousDay = parseInt(document.getElementById("day").value);
+    //console.log(previousMonth);
+    var previousDate = new Date(previousYear, previousMonth, previousDay);
+    //console.log(previousDate);
+    var currentDate = new Date();
+    var currentYear = currentDate.getFullYear();
+    var currentMonth = currentDate.getMonth();
+    var currentDay = currentDate.getDate();
+    console.log(currentYear, currentMonth, currentDay);
+
+    var year = currentYear - previousYear;
+    var months = year*12;
+    console.log(months);
+    months -= previousMonth;
+    console.log(months);
+    months += currentMonth;
+    console.log(months);
+
+    console.log(parseInt(months/12)+ "years"); //Years
+    console.log(months + "months");//Months
+    var differenceInTime = currentDate.getTime() - previousDate.getTime();
+    var differenceInDays = parseInt(differenceInTime/(1000 * 3600 * 24)); //Days
+
+    console.log(differenceInDays+ "days");
+
+    if(parseInt(months/12) > 0){
+        if(parseInt(months/12) == 1){
+            return document.getElementById("timestamp").innerHTML = "<h1>"+ "A year ago " +"</h1>" ;
+        }else {
+            return document.getElementById("timestamp").innerHTML = "<h1>"+ parseInt(months/12) + " - Year's ago " +"</h1>" ;
+        }
+    }
+    else if(months > 0 && differenceInDays >= 31){ 
+        if(months == 1 ){
+            return document.getElementById("timestamp").innerHTML = "<h1>"+" One month ago " +"</h1>" ;
+        }else{
+            return document.getElementById("timestamp").innerHTML = "<h1>"+ months + " - months ago " +"</h1>" ;
+        }
+    }
+    else if(months == 0 || differenceInDays <= 31){
+        if(differenceInDays == 1){
+            return document.getElementById("timestamp").innerHTML = "<h1>"+ "A day ago " +"</h1>" ;
+        }else if(parseInt(differenceInDays/7) == 1){
+            return document.getElementById("timestamp").innerHTML = "<h1>" + " A weak ago " +"</h1>" ;
+        }else if(parseInt(differenceInDays/7) == 2){
+            return document.getElementById("timestamp").innerHTML = "<h1>" + " Two weak's ago " +"</h1>" ;
+        }else{
+            return document.getElementById("timestamp").innerHTML = "<h1>"+ differenceInDays +" - Day's ago"+"</h1>";
+        }
+    }
+    else if(differenceInDays < 0 || months < 0 || parseInt(months/12) < 0){
+        return document.getElementById("timestamp").innerHTML = "<h1>"+"Please enter the valid Date " +"</h1>" ;
+    }
+}
+</script>
+</html>
